@@ -9,14 +9,32 @@ const get = async (
     next: NextFunction
 ): Promise<Response | undefined> => {
     try {
-        if (req.query.error) {
+        if (!parseFloat(req.body.lng) && req.body.lng !== 0) {
             throw new ErrorHandler(
                 statusCodes.BAD_REQUEST,
-                sampleConstants.NOT_FOUND
+                sampleConstants.MISSING_PARAM_LNG
             );
         }
-        await getService();
-        return res.status(statusCodes.SUCCESS).json('Hello World');
+        if (!parseFloat(req.body.lat) && req.body.lat !== 0) {
+            throw new ErrorHandler(
+                statusCodes.BAD_REQUEST,
+                sampleConstants.MISSING_PARAM_LAT
+            );
+        }
+        if (!parseFloat(req.body.alt) && req.body.alt !== 0) {
+            throw new ErrorHandler(
+                statusCodes.BAD_REQUEST,
+                sampleConstants.MISSING_PARAM_ALT
+            );
+        }
+        if (!parseFloat(req.body.radius) && req.body.radius !== 0) {
+            throw new ErrorHandler(
+                statusCodes.BAD_REQUEST,
+                sampleConstants.MISSING_PARAM_RADIUS
+            );
+        }
+        const response = await getService(req.body.lng, req.body.lat, req.body.alt, req.body.radius);
+        return res.status(statusCodes.SUCCESS).json(response);
     } catch (error) {
         next(error);
     }

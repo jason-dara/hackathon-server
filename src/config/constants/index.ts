@@ -8,7 +8,9 @@ export const statusCodes = {
     EXPIRED: 401
 };
 
-// Remove
 export const sampleConstants = {
-    NOT_FOUND: 'Sample not found.'
+    MISSING_PARAM_LAT: 'Latitude is required',
+    MISSING_PARAM_LNG: 'Longitude is required',
+    MISSING_PARAM_ALT: 'Altitude is required',
+    MISSING_PARAM_RADIUS: 'Radius is required'
 };
