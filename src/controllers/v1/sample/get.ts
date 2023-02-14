@@ -33,7 +33,12 @@ const get = async (
                 sampleConstants.MISSING_PARAM_RADIUS
             );
         }
-        const response = await getService(req.body.lng, req.body.lat, req.body.alt, req.body.radius);
+        const response = await getService(
+            req.body.lng,
+            req.body.lat,
+            req.body.alt,
+            req.body.radius
+        );
         return res.status(statusCodes.SUCCESS).json(response);
     } catch (error) {
         next(error);
